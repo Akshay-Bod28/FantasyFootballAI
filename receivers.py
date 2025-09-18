@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 import xgboost as xgb
 from xgboost import XGBClassifier
 from sklearn.model_selection import StratifiedKFold, GridSearchCV
@@ -68,53 +67,53 @@ pd.set_option('display.max_rows', None)  # show all rows
 pd.options.display.float_format = '{:.4f}'.format
 print(data_probs)
 
-# xgb.plot_importance(model, importance_type='gain') #plots importance ranking of statistical features
-# plt.show()
+xgb.plot_importance(model, importance_type='gain') #plots importance ranking of statistical features
+plt.show()
 
-# param_grid = {                                #All hyperparameters I want to tune
-#     "max_depth": [3, 4, 5],
-#     "learning_rate": [0.01, 0.02, 0.03],
-#     "n_estimators": [100, 125, 150],
-#     }
+param_grid = {                                #All hyperparameters I want to tune
+    "max_depth": [3, 4, 5],
+    "learning_rate": [0.01, 0.02, 0.03],
+    "n_estimators": [100, 125, 150],
+    }
 
-# cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)   #Stratified K Fold to make sure the data isn't lopsided due to unevenness of correct/incorrect
+cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)   #Stratified K Fold to make sure the data isn't lopsided due to unevenness of correct/incorrect
 
-# grid_search = GridSearchCV(estimator=model, param_grid=param_grid, scoring="roc_auc", cv=cv, n_jobs=-1)    #Grid search to make sure every possible combination is tested
-# grid_search.fit(X_train, Y_train)
+grid_search = GridSearchCV(estimator=model, param_grid=param_grid, scoring="roc_auc", cv=cv, n_jobs=-1)    #Grid search to make sure every possible combination is tested
+grid_search.fit(X_train, Y_train)
 
-# results = pd.DataFrame(grid_search.cv_results_)
+results = pd.DataFrame(grid_search.cv_results_)
 
-# pivot_table = results.pivot_table(
-#     values='mean_test_score',
-#     index='param_max_depth',
-#     columns='param_learning_rate'
-# )
+pivot_table = results.pivot_table(
+    values='mean_test_score',
+    index='param_max_depth',
+    columns='param_learning_rate'
+)
 
-# pivot_table2 = results.pivot_table(
-#     values='mean_test_score',
-#     index='param_max_depth',
-#     columns='param_n_estimators'
-# )
+pivot_table2 = results.pivot_table(
+    values='mean_test_score',
+    index='param_max_depth',
+    columns='param_n_estimators'
+)
 
 
-# pivot_table3 = results.pivot_table(
-#     values='mean_test_score',
-#     index='param_learning_rate',
-#     columns='param_n_estimators'
-# )
+pivot_table3 = results.pivot_table(
+    values='mean_test_score',
+    index='param_learning_rate',
+    columns='param_n_estimators'
+)
 
-# plt.figure(figsize=(8,6))
-# sns.heatmap(pivot_table, annot=True, cmap="viridis")
-# plt.title("ROC-AUC for learning_rate vs max_depth")
-# plt.show()
+plt.figure(figsize=(8,6))
+sns.heatmap(pivot_table, annot=True, cmap="viridis")
+plt.title("ROC-AUC for learning_rate vs max_depth")
+plt.show()
 
-# plt.figure(figsize=(8,6))
-# sns.heatmap(pivot_table2, annot=True, cmap="viridis")
-# plt.title("ROC-AUC for max_depth vs n_estimators")
-# plt.show()
+plt.figure(figsize=(8,6))
+sns.heatmap(pivot_table2, annot=True, cmap="viridis")
+plt.title("ROC-AUC for max_depth vs n_estimators")
+plt.show()
 
-# plt.figure(figsize=(8,6))
-# sns.heatmap(pivot_table2, annot=True, cmap="viridis")
-# plt.title("ROC-AUC for learning_rate vs n_estimators")
-# plt.show()
+plt.figure(figsize=(8,6))
+sns.heatmap(pivot_table2, annot=True, cmap="viridis")
+plt.title("ROC-AUC for learning_rate vs n_estimators")
+plt.show()
 
