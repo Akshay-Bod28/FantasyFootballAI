@@ -1,0 +1,6 @@
+Need to have:
+Virtual environment - python3 -m venv .venv, .venv/bin/activate
+Starlett - pip install starlette
+Uvicorn - pip install uvicorn
+Pydantic - pip install pydantic
+FastAPI - pip install "fastapi[standard]"

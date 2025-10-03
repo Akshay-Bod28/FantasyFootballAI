@@ -5,7 +5,7 @@ from sklearn.model_selection import StratifiedKFold, GridSearchCV
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-data = pd.read_csv("wrStats.csv") 
+data = pd.read_csv("FantasyAI/app/data/wrStats.csv") 
 
 model = XGBClassifier(
     objective='binary:logistic',  # must be logistic for probabilities

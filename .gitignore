@@ -1,0 +1,52 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+# ---------------------------
+# Python
+# ---------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# ---------------------------
+# Virtual environment
+# ---------------------------
+venv/
+.env/
+
+# ---------------------------
+# OS-specific
+# ---------------------------
+.DS_Store
+Thumbs.db
+
+# ---------------------------
+# IDEs / Editors
+# ---------------------------
+.vscode/
+.idea/
+
+# ---------------------------
+# Logs
+# ---------------------------
+*.log
+
+# ---------------------------
+# Jupyter
+# ---------------------------
+.ipynb_checkpoints/
+
+# ---------------------------
+# Data & models
+# ---------------------------
+app/data/*.csv        # ignore local CSV files (optional)
+app/models/*.pkl      # ignore saved models (optional)
+app/models/*.joblib
+
+# ---------------------------
+# Secrets / credentials
+# ---------------------------
+*.pem
+*.key
+*.crt
+.env
