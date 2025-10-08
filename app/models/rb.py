@@ -4,8 +4,9 @@ from xgboost import XGBClassifier
 from sklearn.model_selection import StratifiedKFold, GridSearchCV
 import seaborn as sns
 import matplotlib.pyplot as plt
+import joblib
 
-data = pd.read_csv("FantasyAI/app/data/rb_stats.csv") 
+data = pd.read_csv("app/data/rb_stats.csv") 
 
 model = XGBClassifier(
     objective='binary:logistic',  # must be logistic for probabilities
@@ -117,3 +118,5 @@ pivot_table3 = results.pivot_table(
 # sns.heatmap(pivot_table2, annot=True, cmap="viridis")
 # plt.title("ROC-AUC for learning_rate vs n_estimators")
 # plt.show()
+
+joblib.dump(model, "app/saved_models/rb_model.pkl")

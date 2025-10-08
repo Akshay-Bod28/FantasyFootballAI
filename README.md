@@ -1,6 +1,5 @@
 Currently working on this
 
 TODO:
-Work on FastAPI
-Create Front end
-Use AWS to deploy
+Make Front End look good with React
+AWS

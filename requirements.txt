@@ -1,6 +1,9 @@
 Need to have:
-Virtual environment - python3 -m venv .venv, .venv/bin/activate
+Virtual environment - python3 -m venv .venv, source .venv/bin/activate, uvicorn main:app --reload
+http://127.0.0.1:8000
 Starlett - pip install starlette
 Uvicorn - pip install uvicorn
 Pydantic - pip install pydantic
 FastAPI - pip install "fastapi[standard]"
+React/JS - npx create-react-app fantasy-ai, cd fantasy-ai, npm start 
+http://localhost:3000

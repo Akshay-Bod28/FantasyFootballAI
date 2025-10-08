@@ -4,8 +4,9 @@ from xgboost import XGBClassifier
 from sklearn.model_selection import StratifiedKFold, GridSearchCV
 import seaborn as sns
 import matplotlib.pyplot as plt
+import joblib
 
-data = pd.read_csv("FantasyAI/app/data/wrStats.csv") 
+data = pd.read_csv("app/data/wrStats.csv") 
 
 model = XGBClassifier(
     objective='binary:logistic',  # must be logistic for probabilities
@@ -102,18 +103,20 @@ pivot_table3 = results.pivot_table(
     columns='param_n_estimators'
 )
 
-plt.figure(figsize=(8,6))
-sns.heatmap(pivot_table, annot=True, cmap="viridis")
-plt.title("ROC-AUC for learning_rate vs max_depth")
-plt.show()
+# plt.figure(figsize=(8,6))
+# sns.heatmap(pivot_table, annot=True, cmap="viridis")
+# plt.title("ROC-AUC for learning_rate vs max_depth")
+# plt.show()
 
-plt.figure(figsize=(8,6))
-sns.heatmap(pivot_table2, annot=True, cmap="viridis")
-plt.title("ROC-AUC for max_depth vs n_estimators")
-plt.show()
+# plt.figure(figsize=(8,6))
+# sns.heatmap(pivot_table2, annot=True, cmap="viridis")
+# plt.title("ROC-AUC for max_depth vs n_estimators")
+# plt.show()
 
-plt.figure(figsize=(8,6))
-sns.heatmap(pivot_table2, annot=True, cmap="viridis")
-plt.title("ROC-AUC for learning_rate vs n_estimators")
-plt.show()
+# plt.figure(figsize=(8,6))
+# sns.heatmap(pivot_table2, annot=True, cmap="viridis")
+# plt.title("ROC-AUC for learning_rate vs n_estimators")
+# plt.show()
+
+joblib.dump(model, "app/saved_models/wr_model.pkl")
 
