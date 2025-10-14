@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+import "./PredictForm.css";
 
 function PredictForm() {
-  const [playerName, setPlayerName] = useState("");  // Player input
-  const [position, setPosition] = useState("WR");    // Position input
-  const [year, setYear] = useState(new Date().getFullYear()); // Year input
-  const [result, setResult] = useState(null);       // Store API response
+  const [playerName, setPlayerName] = useState("");
+  const [position, setPosition] = useState("WR");
+  const [year, setYear] = useState(new Date().getFullYear());
+  const [result, setResult] = useState(null);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();  // Prevent page reload
+    e.preventDefault();
 
     const body = { player_name: playerName };
 
@@ -22,17 +23,16 @@ function PredictForm() {
       );
 
       const data = await response.json();
-      setResult(data);  // Save API response
+      setResult(data);
     } catch (error) {
       setResult({ error: error.message });
     }
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Fantasy Player Predictor</h1>
-
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form">
         <label>
           Player Name:
           <input
@@ -42,7 +42,6 @@ function PredictForm() {
             required
           />
         </label>
-        <br />
 
         <label>
           Position:
@@ -56,7 +55,6 @@ function PredictForm() {
             <option value="TE">TE</option>
           </select>
         </label>
-        <br />
 
         <label>
           Year:
@@ -67,15 +65,25 @@ function PredictForm() {
             required
           />
         </label>
-        <br />
 
         <button type="submit">Predict</button>
       </form>
 
       {result && (
-        <div>
-          <h2>Result:</h2>
-          <pre>{JSON.stringify(result, null, 2)}</pre>
+        <div className="result">
+          {result.error ? (
+            <p className="error">{result.error}</p>
+          ) : (
+            <>
+              <h2>{result.player}</h2>
+              <p>
+                Probability Top 10:{" "}
+                <span className="prob">
+                  {(result.probability_top_10 * 100).toFixed(2)}%
+                </span>
+              </p>
+            </>
+          )}
         </div>
       )}
     </div>

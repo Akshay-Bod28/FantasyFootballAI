@@ -25,7 +25,7 @@ async def lifespan(app: FastAPI):
 
     #While app shuts down 
     print("Shutting down...")
-    # (You could close database connections, etc., here)
+
 
 app = FastAPI(lifespan=lifespan)
 
@@ -52,18 +52,18 @@ def predict_player(
     model = app.state.models[position]
     data = app.state.datasets[position]
 
-    # Filter player
+    #filter player
     name = player_data.get("player_name", "Doesn't exist")   #gets player name from JSON
     player_info = data[data["player_name"].str.lower() == name.lower()]
     if player_info.empty:
         return {"error": f"Player {name} not found in {position} dataset"}
 
-    # Filter year
+    #filter year
     if year not in player_info["season"].values:
         return {"error": f"Player {name} did not play in {year}"}
     player_info = player_info[player_info["season"] == year].copy()
 
-    # Feature columns per position
+    #feature columns per position
     feature_cols_per_position = {
         "WR": ["season","receiving_yards","yards_after_catch","rush_attempts","rush_touchdown","pass_touchdown","fumble","receptions","targets","receiving_touchdown","receptions_redzone","targets_redzone","receiving_touchdown_redzone","fantasy_points_ppr","offense_snaps","total_tds","touches","total_yards","games_missed","age","games_played_season"],
         "RB": ["season","receiving_yards","yards_after_catch","rush_attempts","rushing_yards","tackled_for_loss","rush_touchdown","pass_touchdown","fumble","receptions","targets","receiving_touchdown","receptions_redzone","targets_redzone","receiving_touchdown_redzone","rush_attempts_redzone","rush_touchdown_redzone","total_tds","touches","total_yards","age","games_played_season"],
@@ -73,15 +73,15 @@ def predict_player(
 
     feature_cols = feature_cols_per_position[position]
 
-    # All CSV Columns
+    #all CSV file columns
     feature_cols = [col for col in feature_cols if col in player_info.columns]
     if not feature_cols:
         return {"error": f"No valid feature columns found for {position} and player {name}"}
 
-    # Convert to all columns to numeric
+    #convert to all columns to numeric vals
     player_features = player_info[feature_cols].apply(pd.to_numeric, errors="coerce")
 
-    # Predict probability
+    #predict probability
     try:
         prob = float(model.predict_proba(player_features)[:, 1])
     except Exception as e:

@@ -1,0 +1,56 @@
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    background-color: #111;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+  }
+  
+  input, select {
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #444;
+    background-color: #222;
+    color: #fff;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #1e90ff;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  button:hover {
+    background-color: #1c7cd6;
+  }
+  
+  .result {
+    margin-top: 20px;
+    background-color: #111;
+    padding: 15px;
+    border-radius: 8px;
+    width: 300px;
+  }
+  
+  .result h2 {
+    margin: 0 0 10px 0;
+  }
+  
+  .prob {
+    font-weight: bold;
+    color: #1e90ff;
+  }
+  
+  .error {
+    color: red;
+    font-weight: bold;
+  }
+  
