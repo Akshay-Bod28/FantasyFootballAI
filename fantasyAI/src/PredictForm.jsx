@@ -8,7 +8,7 @@ function PredictForm() {
   const [result, setResult] = useState(null);
 
     const body = { player_name: playerName };
-    const API_URL = "http://18.119.135.73:8000";
+    const API_URL = process.env.REACT_APP_API_URL || "http://18.119.135.73:8000";
 
     const handleSubmit = async (e) => {
       e.preventDefault();
