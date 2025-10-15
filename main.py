@@ -2,6 +2,7 @@ from fastapi import FastAPI, Body, Query
 import joblib
 import pandas as pd
 from contextlib import asynccontextmanager
+import os
 
 models = {}
 datasets = {}
@@ -31,20 +32,16 @@ app = FastAPI(lifespan=lifespan)
 
 from fastapi.middleware.cors import CORSMiddleware
 
+EC2_IP = os.getenv("EC2_PUBLIC_IP", "18.119.135.73")
+
 origins = [
-    "http://18.119.135.73",
-    "http://18.119.135.73:80",
+    f"http://{EC2_IP}",
+    f"http://{EC2_IP}:80",
+    f"https://{EC2_IP}",
+    f"https://{EC2_IP}:443",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 @app.post("/predict")
 def predict_player(
