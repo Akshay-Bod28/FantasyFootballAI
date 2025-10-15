@@ -31,9 +31,14 @@ app = FastAPI(lifespan=lifespan)
 
 from fastapi.middleware.cors import CORSMiddleware
 
+origins = [
+    "http://localhost:3000",        # React development
+    "http://3.145.60.140:4173"     # Your deployed frontend
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # React app origin
+    allow_origins=origins,  # <- use this list
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
