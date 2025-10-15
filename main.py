@@ -33,12 +33,14 @@ from fastapi.middleware.cors import CORSMiddleware
 
 origins = [
     "http://18.119.135.73",
-    "https://18.119.135.73"     # deployed frontend
+    "http://18.119.135.73:80",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins, 
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
