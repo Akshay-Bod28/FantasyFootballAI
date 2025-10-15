@@ -77,7 +77,7 @@ function PredictForm() {
             <>
               <h2>{result.player}</h2>
               <p>
-                Probability Top 10:{" "}
+                Probability Top 10 Next Season:{" "}
                 <span className="prob">
                   {(result.probability_top_10 * 100).toFixed(2)}%
                 </span>
