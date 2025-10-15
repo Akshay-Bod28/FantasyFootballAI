@@ -32,16 +32,15 @@ app = FastAPI(lifespan=lifespan)
 
 from fastapi.middleware.cors import CORSMiddleware
 
-EC2_IP = os.getenv("EC2_PUBLIC_IP", "18.119.135.73")
-
 origins = [
-    f"http://{EC2_IP}",
-    f"http://{EC2_IP}:80",
-    f"https://{EC2_IP}",
-    f"https://{EC2_IP}:443",
+    "http://18.119.135.73",
+    "http://18.119.135.73:80",
+    "https://18.119.135.73",
+    "https://18.119.135.73:443",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
+
 
 @app.post("/predict")
 def predict_player(
