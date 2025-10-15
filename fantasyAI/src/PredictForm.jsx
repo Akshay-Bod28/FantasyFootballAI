@@ -7,20 +7,21 @@ function PredictForm() {
   const [year, setYear] = useState(new Date().getFullYear());
   const [result, setResult] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
     const body = { player_name: playerName };
+    const API_URL = "http://18.119.135.73:8000";
 
-    try {
-      const response = await fetch(
-        `/api/predict?position=${position}&year=${year}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ player_name: playerName }),
-        }
-      );
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+  
+      try {
+        const response = await fetch(
+          `${API_URL}/predict?position=${position}&year=${year}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ player_name: playerName }),
+          }
+        );
 
       const data = await response.json();
       setResult(data);
