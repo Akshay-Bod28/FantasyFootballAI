@@ -7,8 +7,6 @@ function PredictForm() {
   const [year, setYear] = useState(new Date().getFullYear());
   const [result, setResult] = useState(null);
 
-  const API_URL = process.env.REACT_APP_API_URL || "http://18.119.135.73:8000";
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -16,7 +14,7 @@ function PredictForm() {
 
     try {
       const response = await fetch(
-        `${API_URL}/predict?position=${position}&year=${year}`,
+        `/api/predict?position=${position}&year=${year}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -79,7 +77,7 @@ function PredictForm() {
             <>
               <h2>{result.player}</h2>
               <p>
-                Probability Top 10 Next Season:{" "}
+                Probability Top 10 Next Year:{" "}
                 <span className="prob">
                   {(result.probability_top_10 * 100).toFixed(2)}%
                 </span>
